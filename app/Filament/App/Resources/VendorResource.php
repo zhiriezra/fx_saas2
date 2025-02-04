@@ -23,6 +23,9 @@ class VendorResource extends Resource
 
     protected static ?string $navigationGroup = 'Marketplace Information';
 
+    protected static bool $shouldRegisterNavigation = false;
+
+
     public static function form(Form $form): Form
     {
         return $form

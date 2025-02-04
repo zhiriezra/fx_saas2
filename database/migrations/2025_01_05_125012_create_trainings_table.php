@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid')->unique();
             $table->string('title');
             $table->string('description');
+            $table->foreignId('team_id')->nullable();
             $table->foreignId('agent_id')->constrained();
             $table->string('venue');
             $table->foreignId('state_id')->constrained();

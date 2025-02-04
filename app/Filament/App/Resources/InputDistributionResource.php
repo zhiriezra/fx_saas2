@@ -17,9 +17,14 @@ class InputDistributionResource extends Resource
 {
     protected static ?string $model = InputDistribution::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-arrows-pointing-out';
 
     protected static ?string $navigationGroup = 'Value-chain Information';
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {

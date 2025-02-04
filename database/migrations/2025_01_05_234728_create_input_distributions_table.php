@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('input_distributions', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid', 36)->unique();
+            $table->string('uuid')->unique();
+            $table->foreignId('team_id')->constrained();
             $table->foreignId('state_id')->constrained();
             $table->foreignId('lga_id')->constrained();
             $table->foreignId('farmer_id')->constrained();

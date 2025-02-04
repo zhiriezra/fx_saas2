@@ -30,9 +30,61 @@ class FarmersRelationManager extends RelationManager
             ->recordTitleAttribute('fname')
             ->searchable()
             ->columns([
-                Tables\Columns\TextColumn::make('fname'),
-                Tables\Columns\TextColumn::make('mname'),
-                Tables\Columns\TextColumn::make('lname'),
+                Tables\Columns\TextColumn::make('fname')
+                    ->label('First name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('mname')
+                    ->label('Middle name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('lname')
+                    ->label('Last name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('mobile_no')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('gender')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('contact_address')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('permanent_address')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('dob')
+                    ->label('Date of Birth')
+                    ->date()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('bvn')
+                    ->label('BVN')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('nin')
+                    ->label('NIN')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('state.name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('lga.name')
+                    ->label('LGA')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('marital_status')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('disability')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('residential_status')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('cooperative_name')
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\IconColumn::make('status')
+                    ->boolean()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Profiled Date')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

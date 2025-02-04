@@ -4,6 +4,7 @@ namespace App\Filament\App\Resources;
 
 use App\Filament\App\Resources\AgentResource\Pages;
 use App\Filament\App\Resources\AgentResource\RelationManagers;
+use App\Filament\App\Resources\AgentResource\RelationManagers\AggregationsRelationManager;
 use App\Filament\App\Resources\AgentResource\RelationManagers\FarmersRelationManager;
 use App\Filament\App\Resources\AgentResource\RelationManagers\OrdersRelationManager;
 use App\Filament\App\Resources\AgentResource\RelationManagers\TrainingsRelationManager;
@@ -16,6 +17,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -27,6 +29,13 @@ class AgentResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static ?string $navigationGroup = 'Sales Information';
+
+    protected static ?int $navigationSort = 1;
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -86,18 +95,18 @@ class AgentResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('user.email')
                     ->label('Email')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('user.phone')
                     ->label('Mobile number')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('bvn')
                     ->label('BVN')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('nin')
                     ->label('NIN')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('gender')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('mother_tongue')
@@ -114,11 +123,30 @@ class AgentResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('community')
-                    ->searchable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('State')
+                    ->relationship('state', 'name')
+                    ->label('Filter by State')
+                    ->indicator('State')
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('Lga')
+                    ->relationship('lga', 'name')
+                    ->label('Filter by LGA')
+                    ->indicator('LGA')
+                    ->searchable()
+                    ->preload(),
+                SelectFilter::make('gender')
+                    ->options([
+                        'male' => 'male',
+                        'female' => 'female'
+
+                    ])
+                    ->label('Filter by Gender')
+                    ->indicator('Gender'),
+
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -175,8 +203,8 @@ class AgentResource extends Resource
     {
         return [
             FarmersRelationManager::class,
-            OrdersRelationManager::class,
             TrainingsRelationManager::class,
+            AggregationsRelationManager::class,
         ];
     }
 

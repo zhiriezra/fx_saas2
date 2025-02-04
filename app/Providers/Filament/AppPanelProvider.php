@@ -23,11 +23,16 @@ class AppPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('app')
-            ->path('app')
+            ->id('agro-processors')
+            ->path('agro-processors')
             ->login()
             ->brandLogo('https://farmex.extensionafrica.com/assets/farmex-logo-main-with-tagline.png')
             ->brandLogoHeight('3rem')
+            ->navigationGroups([
+                'Aggregations',
+                'Sales Information',
+                'Value-chain Information'
+            ])
             ->colors([
                 'primary' => '#287e36',
             ])
