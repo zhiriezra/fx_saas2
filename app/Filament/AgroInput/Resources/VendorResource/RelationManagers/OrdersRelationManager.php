@@ -31,15 +31,34 @@ class OrdersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('id')
             ->columns([
-                TextColumn::make('product.name'),
-                TextColumn::make('quantity'),
-                TextColumn::make('status'),
-                // TextColumn::make('Agent')
-                //     ->getStateUsing(fn ($record) => "{$record->agent->user->firstname} {$record->agent->user->lastname}"),
-                // TextColumn::make('Agent Phone')
-                //     ->getStateUsing(fn ($record) => $record->agent->user->phone),
-                // TextColumn::make('Agent Email')
-                //     ->getStateUsing(fn ($record) => $record->agent->user->email),
+                Tables\Columns\TextColumn::make('product.vendor.business_name')
+                    ->label('Hubs')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('product.name')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('Farmer')
+                    ->getStateUsing(fn($record) => "{$record->farmer->fname} {$record->farmer->lname}")
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('Farmer Phone')
+                    ->getStateUsing(fn($record) => "+234 {$record->farmer->mobile_no}")
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('State')
+                    ->getStateUsing(fn($record) => "{$record->farmer->state->name}")
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('LGA')
+                    ->getStateUsing(fn($record) => "{$record->farmer->lga->name}")
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('quantity')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('product.agent_price')
+                    ->label('Unit Price')
+                    ->money('NGN')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('total')
+                    ->label('Total')
+                    ->getStateUsing(fn ($record) => ($record->product->agent_price * $record->quantity))
+                    ->money('NGN'),
                 TextColumn::make('created_at')
                     ->label('Date'),
             ])

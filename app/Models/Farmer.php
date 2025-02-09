@@ -12,11 +12,11 @@ class Farmer extends Model
 
     protected static function booted(): void
     {
-        static::addGlobalScope('team', function (Builder $query) {
-            if (auth()->user()->isTeam()) {
-                $query->where('team_id', auth()->user()->current_team_id);
-            }
-        });
+        // static::addGlobalScope('team', function (Builder $query) {
+        //     if (auth()->user()->isTeam()) {
+        //         $query->where('team_id', auth()->user()->current_team_id);
+        //     }
+        // });
     }
 
     public function agent()

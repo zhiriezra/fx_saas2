@@ -30,7 +30,7 @@ class AgroInputPanelProvider extends PanelProvider
                 'primary' => '#287e36',
                 'danger' => '#dc3545',
             ])
-            ->brandLogo('https://flourmills.s3.eu-central-1.amazonaws.com/images/fmn-logo-black.png')
+            ->brandLogo('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS7zGfX_EZDGEE_Z3lmV5tCI9ejnhHN8DA6w&s')
             ->brandLogoHeight('3rem')
             ->discoverResources(in: app_path('Filament/AgroInput/Resources'), for: 'App\\Filament\\AgroInput\\Resources')
             ->discoverPages(in: app_path('Filament/AgroInput/Pages'), for: 'App\\Filament\\AgroInput\\Pages')

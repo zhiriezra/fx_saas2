@@ -34,6 +34,11 @@ class FarmVisitationsRelationManager extends RelationManager
                 TextColumn::make('farm_status'),
                 TextColumn::make('observation')->limit(50),
                 TextColumn::make('remark'),
+                TextColumn::make('images')
+                    ->label('Visitation Images')
+                    ->url(fn($record) => $record->images, true)
+                    ->color('primary')
+                    ->icon('heroicon-o-link'),
                 TextColumn::make('date_visited'),
             ])
             ->filters([

@@ -106,7 +106,14 @@ class TrainingResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('participant_list')
-                    ->searchable(),
+                    ->url(fn($record) => $record->images, true)
+                    ->color('primary')
+                    ->icon('heroicon-o-link'),
+                Tables\Columns\TextColumn::make('images')
+                    ->label('Training Images')
+                    ->url(fn($record) => $record->images, true)
+                    ->color('primary')
+                    ->icon('heroicon-o-link'),
                 Tables\Columns\TextColumn::make('start_date')
                     ->date()
                     ->sortable(),
