@@ -55,7 +55,6 @@ class User extends Authenticatable implements HasName, HasTenants
         'password' => 'hashed',
     ];
 
-
     public function isAdmin(){
         return $this->user_type_id === 3;
     }
@@ -74,21 +73,8 @@ class User extends Authenticatable implements HasName, HasTenants
     {
         return "{$this->firstname} {$this->lastname}";
     }
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
 
     public function teams(): BelongsToMany
-    {
-        return $this->belongsToMany(Team::class);
-    }
->>>>>>> Stashed changes
-
-    public function canAccessPanel(Panel $panel): bool
-=======
-    
-    public function teams(): BelongsToMany
->>>>>>> c5aa88c115319032d22afa9c48ac23ad4ccc1e8b
     {
         return $this->belongsToMany(Team::class);
     }
