@@ -28,7 +28,7 @@ class AgroInputPanelProvider extends PanelProvider
         return $panel
             ->id('agro-input')
             ->path('agro-input')
-            // ->login()
+            ->login()
             ->colors([
                 'primary' => '#287e36',
                 'danger' => '#dc3545',

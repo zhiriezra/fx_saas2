@@ -26,7 +26,7 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->id('agro-processors')
             ->path('agro-processors')
-            // ->login()
+            ->login()
             ->brandLogo('https://farmex.extensionafrica.com/assets/farmex-logo-main-with-tagline.png')
             ->brandLogoHeight('3rem')
             ->navigationGroups([
