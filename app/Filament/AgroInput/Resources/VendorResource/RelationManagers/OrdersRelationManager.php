@@ -2,7 +2,9 @@
 
 namespace App\Filament\AgroInput\Resources\VendorResource\RelationManagers;
 
+use App\Filament\Exports\OrderExporter;
 use Faker\Provider\ar_EG\Text;
+use Filament\Tables\Actions\ExportAction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -33,9 +35,11 @@ class OrdersRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('product.vendor.business_name')
                     ->label('Hubs')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('product.name')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('Farmer')
                     ->getStateUsing(fn($record) => "{$record->farmer->fname} {$record->farmer->lname}")
                     ->sortable(),
@@ -46,6 +50,7 @@ class OrdersRelationManager extends RelationManager
                     ->getStateUsing(fn($record) => "{$record->farmer->state->name}")
                     ->sortable(),
                 Tables\Columns\TextColumn::make('LGA')
+                    ->label('LGA')
                     ->getStateUsing(fn($record) => "{$record->farmer->lga->name}")
                     ->sortable(),
                 Tables\Columns\TextColumn::make('quantity')
@@ -67,6 +72,8 @@ class OrdersRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
+                ExportAction::make()
+                    ->exporter(OrderExporter::class),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

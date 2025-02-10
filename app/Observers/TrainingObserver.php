@@ -13,7 +13,7 @@ class TrainingObserver
     public function created(Training $training): void
     {
         if(auth()->user()){
-            $training->team_id = auth()->user()->current_team_id;
+            $training->team_id = auth()->user()->team_id;
             $training->save();
         }
     }

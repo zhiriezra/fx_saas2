@@ -4,26 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class CompetitionProductPricing extends Model
+class CompetitionActivity extends Model
 {
     use HasFactory;
 
     protected $guarded = [''];
 
-    public function team()
-    {
+    public function team(): BelongsTo{
         return $this->belongsTo(Team::class);
     }
 
-    public function state()
-    {
+    public function state(): BelongsTo{
         return $this->belongsTo(State::class);
     }
 
-    public function lga()
-    {
+    public function lga(): BelongsTo{
         return $this->belongsTo(Lga::class);
     }
-
 }

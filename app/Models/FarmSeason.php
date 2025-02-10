@@ -10,6 +10,11 @@ class FarmSeason extends Model
 {
     use HasFactory;
 
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
     public function farm(): BelongsTo
     {
         return $this->belongsTo(Farm::class);
@@ -30,10 +35,5 @@ class FarmSeason extends Model
     public function agent(){
         return $this->hasOneThrough(Farm::class, Farmer::class, Agent::class, 'farm_id', 'farmer_id', 'agent_id');
     }
-
-
-
-
-
 
 }

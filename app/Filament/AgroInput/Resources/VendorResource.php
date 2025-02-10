@@ -7,6 +7,7 @@ use App\Filament\AgroInput\Resources\VendorResource\RelationManagers;
 use App\Filament\AgroInput\Resources\VendorResource\RelationManagers\OrdersRelationManager;
 use App\Filament\AgroInput\Resources\VendorResource\RelationManagers\ProductsRelationManager;
 use App\Models\Vendor;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
@@ -35,7 +36,9 @@ class VendorResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        $tenant = Filament::getTenant();
+
+        return static::getModel()::where('team_id', $tenant->id ?? null)->count();
     }
 
     public static function form(Form $form): Form
