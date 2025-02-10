@@ -38,6 +38,11 @@ class AggregationCenter extends Model
         'lga_id'
     ];
 
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
     public function productAggregations()
     {
         return $this->hasMany(CommodityAggregation::class);

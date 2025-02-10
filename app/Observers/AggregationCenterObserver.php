@@ -12,7 +12,7 @@ class AggregationCenterObserver
     public function created(AggregationCenter $aggregationCenter): void
     {
         if(auth()->user()){
-            $aggregationCenter->team_id = auth()->user()->current_team_id;
+            $aggregationCenter->team_id = auth()->user()->team_id;
             $aggregationCenter->save();
         }
     }

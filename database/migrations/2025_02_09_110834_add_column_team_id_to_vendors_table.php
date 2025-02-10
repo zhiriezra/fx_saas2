@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('trainings', function (Blueprint $table) {
-            $table->string('images')->nullable()->after('participant_list');
+        Schema::table('vendors', function (Blueprint $table) {
+            $table->uuid('uuid')->nullable()->after('id');
+            $table->foreignId('team_id')->nullable()->after('uuid');
         });
     }
 
@@ -21,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('trainings', function (Blueprint $table) {
-            $table->dropColumn(['images']);
+        Schema::table('vendors', function (Blueprint $table) {
+            $table->dropColumn('uuid');
+            $table->dropColumn('team_id');
         });
     }
 };

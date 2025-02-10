@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('commodity_pricing_reports', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('team_id')->constrained()->nullable();
             $table->string('commodity');
             $table->string('unit');
             $table->foreignId('state_id')->constrained();
             $table->foreignId('lga_id')->constrained();
             $table->string('location');
             $table->decimal('price', 10, 2);
-            $table->foreignId('team_id')->constrained()->nullable();
             $table->timestamps();
         });
     }
