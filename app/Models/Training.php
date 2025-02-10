@@ -28,13 +28,13 @@ class Training extends Model
 
     protected static function booted(): void
     {
-        static::addGlobalScope('team', function (Builder $query) {
-            if (auth()->user()->isTeam()) {
-                $query->where('team_id', auth()->user()->current_team_id);
-                // or with a `team` relationship defined:
-                // $query->whereBelongsTo(auth()->user()->team);
-            }
-        });
+        // static::addGlobalScope('team', function (Builder $query) {
+        //     if (auth()->user()->isTeam()) {
+        //         $query->where('team_id', auth()->user()->current_team_id);
+        //         // or with a `team` relationship defined:
+        //         // $query->whereBelongsTo(auth()->user()->team);
+        //     }
+        // });
     }
 
     protected $fillable = [
@@ -51,6 +51,11 @@ class Training extends Model
         'females',
         'males',
     ];
+
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
 
     public function agent()
     {

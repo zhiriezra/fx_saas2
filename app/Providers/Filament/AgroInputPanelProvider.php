@@ -60,6 +60,7 @@ class AgroInputPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])->tenant(Team::class, ownershipRelationship: 'team')
+            ->tenant(Team::class, slugAttribute: 'slug');
     }
 }

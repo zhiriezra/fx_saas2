@@ -168,9 +168,9 @@ class DemoResource extends Resource
     {
         return [
             'index' => Pages\ListDemos::route('/'),
-            'create' => Pages\CreateDemo::route('/create'),
+            // 'create' => Pages\CreateDemo::route('/create'),
             'view' => Pages\ViewDemo::route('/{record}'),
-            'edit' => Pages\EditDemo::route('/{record}/edit'),
+            // 'edit' => Pages\EditDemo::route('/{record}/edit'),
         ];
     }
 }

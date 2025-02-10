@@ -31,6 +31,11 @@ class CommodityAggregation extends Model
         'commodity',
     ];
 
+    public function team()
+    {
+        return $this->belongsTo(Team::class);
+    }
+
     public function aggregationCenter()
     {
         return $this->belongsTo(AggregationCenter::class);
@@ -41,7 +46,4 @@ class CommodityAggregation extends Model
         return $this->belongsTo(Agent::class);
     }
 
-    public function team(){
-        return $this->belongsTo(Team::class);
-    }
 }

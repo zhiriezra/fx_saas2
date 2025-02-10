@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('trainings', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
+            $table->foreignId('team_id')->constrained();
+            $table->foreignId('agent_id')->constrained();
             $table->string('title');
             $table->string('description');
-            $table->foreignId('team_id')->nullable();
-            $table->foreignId('agent_id')->constrained();
             $table->string('venue');
             $table->foreignId('state_id')->constrained();
             $table->foreignId('lga_id')->constrained();
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('females')->nullable();
             $table->integer('males')->nullable();
             $table->string('participant_list')->nullable();
+            $table->string('images_link')->nullable();
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->timestamps();

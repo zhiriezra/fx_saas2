@@ -22,17 +22,17 @@ class StatsAppOverview extends BaseWidget
     {
         return [
             Stat::make('Agents', Agent::query()->count())
-            ->description('Agents working for you')
-            ->descriptionIcon('heroicon-m-users')
-            ->color('primary'),
-        Stat::make('Farm Lands', FarmSeason::query()->count())
-            ->description('Your farm lands')
-            ->descriptionIcon('heroicon-m-arrow-trending-up')
-            ->color('primary'),
-        Stat::make('Hubs', Vendor::query()->count())
-            ->description('Hubs in your network')
-            ->descriptionIcon('heroicon-m-shopping-cart')
-            ->color('primary'),
+                ->description('Agents working for you')
+                ->descriptionIcon('heroicon-m-users')
+                ->color('primary'),
+            Stat::make('Farm Lands', FarmSeason::query()->count())
+                ->description('Your farm lands')
+                ->descriptionIcon('heroicon-m-arrow-trending-up')
+                ->color('primary'),
+            Stat::make('Hubs', Vendor::query()->count())
+                ->description('Hubs in your network')
+                ->descriptionIcon('heroicon-m-shopping-cart')
+                ->color('primary'),
         ];
     }
 }

@@ -8,14 +8,18 @@ namespace App\Models;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
+use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements HasName, FilamentUser
+class User extends Authenticatable implements HasName, HasTenants
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -51,9 +55,6 @@ class User extends Authenticatable implements HasName, FilamentUser
         'password' => 'hashed',
     ];
 
-    public function team(){
-        return $this->belongsTo(Team::class, 'current_team_id');
-    }
 
     public function isAdmin(){
         return $this->user_type_id === 3;
@@ -73,6 +74,7 @@ class User extends Authenticatable implements HasName, FilamentUser
     {
         return "{$this->firstname} {$this->lastname}";
     }
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
 
@@ -83,20 +85,23 @@ class User extends Authenticatable implements HasName, FilamentUser
 >>>>>>> Stashed changes
 
     public function canAccessPanel(Panel $panel): bool
+=======
+    
+    public function teams(): BelongsToMany
+>>>>>>> c5aa88c115319032d22afa9c48ac23ad4ccc1e8b
     {
-        if ($panel->getId() === 'admin') {
-            return $this->isAdmin();
-        }
-
-        if ($panel->getId() === 'agro-input') {
-            return $this->isTeam() && $this->team->team_type_id === 1;
-        }
-
-        if ($panel->getId() === 'agro-processors') {
-            return $this->isTeam() && $this->team->team_type_id === 2;
-        }
-
-        return true;
+        return $this->belongsToMany(Team::class);
     }
+
+    public function getTenants(Panel $panel): Collection
+    {
+        return $this->teams;
+    }
+
+    public function canAccessTenant(Model $tenant): bool
+    {
+        return $this->teams()->whereKey($tenant)->exists();
+    }
+
 
 }
