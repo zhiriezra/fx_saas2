@@ -73,6 +73,14 @@ class User extends Authenticatable implements HasName, FilamentUser
     {
         return "{$this->firstname} {$this->lastname}";
     }
+<<<<<<< Updated upstream
+=======
+
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class);
+    }
+>>>>>>> Stashed changes
 
     public function canAccessPanel(Panel $panel): bool
     {

@@ -2,6 +2,9 @@
 
 namespace App\Providers\Filament;
 
+use App\Models\Team;
+use Filament\Enums\ThemeMode;
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -25,12 +28,14 @@ class AgroInputPanelProvider extends PanelProvider
         return $panel
             ->id('agro-input')
             ->path('agro-input')
-            ->login()
+            // ->login()
             ->colors([
                 'primary' => '#287e36',
                 'danger' => '#dc3545',
             ])
-            ->brandLogo('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS7zGfX_EZDGEE_Z3lmV5tCI9ejnhHN8DA6w&s')
+            ->defaultThemeMode(ThemeMode::Dark)
+            ->favicon(asset('logos/farmex.png'))
+            ->brandLogo('https://farmex.extensionafrica.com/assets/farmex-logo-main-with-tagline.png')
             ->brandLogoHeight('3rem')
             ->discoverResources(in: app_path('Filament/AgroInput/Resources'), for: 'App\\Filament\\AgroInput\\Resources')
             ->discoverPages(in: app_path('Filament/AgroInput/Pages'), for: 'App\\Filament\\AgroInput\\Pages')

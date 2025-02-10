@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -25,7 +26,7 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->id('agro-processors')
             ->path('agro-processors')
-            ->login()
+            // ->login()
             ->brandLogo('https://farmex.extensionafrica.com/assets/farmex-logo-main-with-tagline.png')
             ->brandLogoHeight('3rem')
             ->navigationGroups([
@@ -36,6 +37,7 @@ class AppPanelProvider extends PanelProvider
             ->colors([
                 'primary' => '#287e36',
             ])
+            ->defaultThemeMode(ThemeMode::Dark)
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
             ->pages([
