@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\AgroInput\Pages\ChangePasswordPage;
 use App\Models\Team;
 use Filament\Enums\ThemeMode;
 use Filament\Facades\Filament;
@@ -9,6 +10,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -28,10 +30,17 @@ class AgroInputPanelProvider extends PanelProvider
         return $panel
             ->id('agro-input')
             ->path('agro-input')
-            ->login()
+            // ->login()
             ->colors([
                 'primary' => '#287e36',
                 'danger' => '#dc3545',
+            ])
+            ->userMenuItems([
+                MenuItem::make()
+                ->url(fn (): string => ChangePasswordPage::getUrl())
+                ->label('Change Password')
+                ->icon('heroicon-o-lock-closed')
+
             ])
             ->defaultThemeMode(ThemeMode::Dark)
             ->favicon(asset('logos/farmex.png'))
@@ -60,7 +69,8 @@ class AgroInputPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])->tenant(Team::class, ownershipRelationship: 'team')
+            ])
+            ->tenant(Team::class, ownershipRelationship: 'team')
             ->tenant(Team::class, slugAttribute: 'slug');
     }
 }

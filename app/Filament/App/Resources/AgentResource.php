@@ -10,6 +10,7 @@ use App\Filament\App\Resources\AgentResource\RelationManagers\OrdersRelationMana
 use App\Filament\App\Resources\AgentResource\RelationManagers\TrainingsRelationManager;
 use App\Models\Agent;
 use Faker\Provider\ar_EG\Text;
+use Filament\Facades\Filament;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\Section;
@@ -34,7 +35,9 @@ class AgentResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        $tenant = Filament::getTenant();
+
+        return static::getModel()::where('team_id', $tenant->id ?? null)->count();
     }
 
     public static function form(Form $form): Form
