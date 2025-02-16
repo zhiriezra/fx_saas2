@@ -18,8 +18,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
+use PDO;
 
-class User extends Authenticatable implements HasName, HasTenants
+class User extends Authenticatable implements HasName, HasTenants, FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -87,6 +88,32 @@ class User extends Authenticatable implements HasName, HasTenants
     public function canAccessTenant(Model $tenant): bool
     {
         return $this->teams()->whereKey($tenant)->exists();
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'app') {
+            return true;
+        }
+
+        if ($panel->getId() === 'agro-processors') {
+            $user = auth()->user();
+            $userTeam = $user->teams->first();
+            if($userTeam->team_type->name == 'agro-processors'){
+                return true;
+            }
+        }
+
+        if ($panel->getId() === 'agro-input') {
+            $user = auth()->user();
+            $userTeam = $user->teams->first();
+            if($userTeam->team_type->name == 'agro-input'){
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
 
