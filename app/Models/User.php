@@ -28,12 +28,7 @@ class User extends Authenticatable implements HasName, HasTenants
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'firstname',
-        'lastname',
-        'email',
-        'password',
-    ];
+    protected $guarded = [''];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -55,6 +50,11 @@ class User extends Authenticatable implements HasName, HasTenants
         'password' => 'hashed',
     ];
 
+    public function agent()
+    {
+        return $this->hasOne(Agent::class, 'user_id');
+    }
+    
     public function isAdmin(){
         return $this->user_type_id === 3;
     }

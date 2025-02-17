@@ -11,6 +11,8 @@ class Team extends Model implements HasAvatar
 {
     use HasFactory;
 
+    protected $guarded = [''];
+
     public function getLogoUrl(): string
     {
         return $this->logo;
