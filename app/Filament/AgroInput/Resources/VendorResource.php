@@ -144,6 +144,7 @@ class VendorResource extends Resource
                 Tables\Columns\TextColumn::make('business_mobile')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('bank')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
                 Tables\Columns\TextColumn::make('account_no')
                     ->toggleable(isToggledHiddenByDefault: true)
