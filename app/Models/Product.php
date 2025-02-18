@@ -13,7 +13,7 @@ class Product extends Model
     {
         return $this->belongsTo(Team::class);
     }
-    
+
     public function vendor(){
         return $this->belongsTo(Vendor::class);
     }
@@ -23,7 +23,7 @@ class Product extends Model
     }
 
     public function subcategory(){
-        return $this->belongsTo(Subcategory::class);
+        return $this->belongsTo(SubCategory::class);
     }
 
 
