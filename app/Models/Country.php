@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class State extends Model
+class Country extends Model
 {
     use HasFactory;
 
@@ -14,14 +14,8 @@ class State extends Model
         return $query->where('active', 1);
     }
 
-    public function country()
+    public function states()
     {
-        return $this->belongsTo(Country::class, 'country_id', 'id');
+        return $this->hasMany(State::class, 'country_id', 'id');
     }
-
-    public function agents()
-    {
-        return $this->hasMany(Agent::class, 'state_id', 'id');
-    }
-
 }
