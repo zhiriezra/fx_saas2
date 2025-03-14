@@ -16,12 +16,26 @@ class WebsiteController extends Controller
     {
         $country = Country::where('name', $request->country)->first();
         if (!$country) {
-            return response()->json(["status" => false, "message" => "Country not found"], 404);
+            return response()->json([
+                "status" => true,
+                "data" => [
+                    "total_agents" => 0,
+                    "total_lgas_with_agents" => 0,
+                    "lgas" => []
+                ]
+            ]);
         }
 
         $state = State::where('name', $request->state)->where('country_id', $country->id)->first();
         if (!$state) {
-            return response()->json(["status" => false, "message" => "State not found"], 404);
+            return response()->json([
+                "status" => true,
+                "data" => [
+                    "total_agents" => 0,
+                    "total_lgas_with_agents" => 0,
+                    "lgas" => []
+                ]
+            ]);
         }
 
         $lgas = Lga::where('state_id', $state->id)
