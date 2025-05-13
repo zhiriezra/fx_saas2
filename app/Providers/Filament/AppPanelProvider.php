@@ -49,7 +49,7 @@ class AppPanelProvider extends PanelProvider
             ->colors([
                 'primary' => '#287e36',
             ])
-            ->defaultThemeMode(ThemeMode::Dark)
+            // ->defaultThemeMode(ThemeMode::Light)
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
             ->pages([
