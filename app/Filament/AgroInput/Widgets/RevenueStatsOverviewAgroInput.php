@@ -25,7 +25,7 @@ class RevenueStatsOverviewAgroInput extends BaseWidget
             ->whereHas('product.vendor', function ($query) use ($tenantId) {
                 $query->where('team_id', $tenantId);
             })
-            ->whereBetween('orders.created_at', [now()->startOfMonth(), now()])
+            // ->whereBetween('orders.created_at', [now()->startOfMonth(), now()])
             ->sum(DB::raw('orders.quantity * products.agent_price'));
 
         // Get total sales for previous month
