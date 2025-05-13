@@ -23,6 +23,7 @@ class VerifyUserRole
         if(Auth::user()){
             $user = Auth::user(); // Get the logged-in user
             $team = $user->teams->first();
+            // dd($team);
             $team_type = TeamType::where('id', $team->team_type_id)->first();
             return redirect('/'.$team_type->name.'/'.$team->slug);
         }

@@ -27,7 +27,7 @@ class DemoResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Sales';
     protected static ?string $navigationLabel = 'Demos';
-    protected static ?string $modelLabel = 'Demos';
+    protected static ?string $modelLabel = 'Demonstration Plot';
 
 
 

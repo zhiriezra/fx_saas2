@@ -33,9 +33,9 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => '#287e36',
                 'danger' => '#dc3545',
             ])
-            ->defaultThemeMode(ThemeMode::Dark)
+            ->defaultThemeMode(ThemeMode::Light)
             ->favicon(asset('logos/farmex.png'))
-            ->brandLogo('https://farmex.extensionafrica.com/assets/farmex-logo-main-with-tagline.png')
+            ->brandLogo('https://farmex.extensionafrica.com/images/farmex-logo-main-with-tagline.png')
             ->brandLogoHeight('3rem')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
