@@ -25,7 +25,9 @@ class CompetitionActivityResource extends Resource
 
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        $tenant = Filament::getTenant();
+
+        return static::getModel()::where('team_id', $tenant->id ?? null)->count();
     }
 
     public static function form(Form $form): Form
