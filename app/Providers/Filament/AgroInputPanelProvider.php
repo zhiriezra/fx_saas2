@@ -42,9 +42,8 @@ class AgroInputPanelProvider extends PanelProvider
                 ->icon('heroicon-o-lock-closed')
 
             ])
-            ->defaultThemeMode(ThemeMode::Dark)
             ->favicon(asset('logos/farmex.png'))
-            ->brandLogo('https://farmex.extensionafrica.com/assets/farmex-logo-main-with-tagline.png')
+            ->brandLogo('https://farmex.extensionafrica.com/images/farmex-logo-main-with-tagline.png')
             ->brandLogoHeight('3rem')
             ->discoverResources(in: app_path('Filament/AgroInput/Resources'), for: 'App\\Filament\\AgroInput\\Resources')
             ->discoverPages(in: app_path('Filament/AgroInput/Pages'), for: 'App\\Filament\\AgroInput\\Pages')

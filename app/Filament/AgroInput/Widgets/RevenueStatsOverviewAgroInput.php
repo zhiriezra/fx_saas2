@@ -25,7 +25,7 @@ class RevenueStatsOverviewAgroInput extends BaseWidget
             ->whereHas('product.vendor', function ($query) use ($tenantId) {
                 $query->where('team_id', $tenantId);
             })
-            ->whereBetween('orders.created_at', [now()->startOfMonth(), now()])
+            // ->whereBetween('orders.created_at', [now()->startOfMonth(), now()])
             ->sum(DB::raw('orders.quantity * products.agent_price'));
 
         // Get total sales for previous month
@@ -41,17 +41,17 @@ class RevenueStatsOverviewAgroInput extends BaseWidget
 
 
         return [
+            Stat::make('Revenue Across Hubs', 'NGN '. number_format($currentSales,2))
+                ->description('Earnings this month')
+                ->icon('heroicon-m-presentation-chart-bar')
+                ->chart([7, 17])
+                ->color('success'),
+
             Stat::make('Total Revenue Last Month', 'NGN '. number_format($previousSales,2))
                 ->description('Earnings last month')
                 ->icon('heroicon-m-presentation-chart-bar')
                 ->chart([17, 2, 1, 3, 15, 4, 4])
                 ->color('info'),
-
-            Stat::make('Revenue This Month', 'NGN '. number_format($currentSales,2))
-                ->description('Earnings this month')
-                ->icon('heroicon-m-presentation-chart-bar')
-                ->chart([7, 17])
-                ->color($previousSales >= $currentSales ? 'danger':'success'),
 
             Stat::make('Sales Growth', number_format($growth, 2) . '%')
                 ->description($growth >= 0 ? 'Increase from last month' : 'Decrease from last month')

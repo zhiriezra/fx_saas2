@@ -31,7 +31,7 @@ class AppPanelProvider extends PanelProvider
             ->path('agro-processors')
             // ->login()
             ->favicon(asset('logos/farmex.png'))
-            ->brandLogo('https://farmex.extensionafrica.com/assets/farmex-logo-main-with-tagline.png')
+            ->brandLogo('https://farmex.extensionafrica.com/images/farmex-logo-main-with-tagline.png')
             ->brandLogoHeight('3rem')
             ->profile()
             ->navigationGroups([
@@ -49,7 +49,6 @@ class AppPanelProvider extends PanelProvider
             ->colors([
                 'primary' => '#287e36',
             ])
-            ->defaultThemeMode(ThemeMode::Dark)
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
             ->pages([
