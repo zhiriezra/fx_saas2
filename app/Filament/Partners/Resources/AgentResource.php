@@ -88,6 +88,10 @@ class AgentResource extends Resource
                     ->label('Full Name')
                     ->getStateUsing(fn ($record) => $record->user->firstname . ' ' . $record->user->lastname)
                     ->searchable(),
+                Tables\Columns\TextColumn::make('total_farmers')
+                    ->label('Total Farmers')
+                    ->getStateUsing(fn ($record) => $record->farmers->count())
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('gender')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('marital_status')
