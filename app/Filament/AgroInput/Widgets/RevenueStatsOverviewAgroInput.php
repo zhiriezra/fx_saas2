@@ -15,7 +15,7 @@ class RevenueStatsOverviewAgroInput extends BaseWidget
 
     protected ?string $description = 'An overview of sales analytics.';
 
-    protected function getStats(): array
+    protected function getHeaderWidgets(): array
     {
 
         $tenantId = Filament::getTenant()->id;
