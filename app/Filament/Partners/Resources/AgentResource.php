@@ -90,7 +90,7 @@ class AgentResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('total_farmers')
                     ->label('Total Farmers')
-                    ->getStateUsing(fn ($record) => $record->farmers->count())
+                    ->getStateUsing(fn ($record) => $record->farmers()->count())
                     ->searchable(),
                 Tables\Columns\TextColumn::make('gender')
                     ->searchable(),
