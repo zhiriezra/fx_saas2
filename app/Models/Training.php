@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Observers\TrainingObserver;
-use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+// use App\Observers\TrainingObserver;
+// use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-#[ObservedBy([TrainingObserver::class])]
+// #[ObservedBy([TrainingObserver::class])]
 class Training extends Model
 {
     use HasFactory;
@@ -38,6 +38,7 @@ class Training extends Model
     }
 
     protected $fillable = [
+        'team_id',
         'agent_id',
         'state_id',
         'lga_id',

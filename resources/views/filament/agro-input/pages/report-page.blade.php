@@ -1,12 +1,13 @@
 <x-filament-panels::page>
     <div class="w-full h-screen">
-        <!-- <iframe
+        @if(auth()->user()->teams->first()->name == 'FMAN')
+        <iframe
             title="FMAN Report"
             class="w-full h-full border-none"
             src="https://app.powerbi.com/view?r=eyJrIjoiMDE3ZGRmZDctZTJmMS00MTNiLThkMjgtMDc1MTY2NDk1YzZmIiwidCI6IjY0ODMzYzU4LWFjYzQtNDFlMy1iZDk2LWYxZWUxOWE3NzZmMSJ9&pageName=c86f1232309db1bbce9d" frameborder="0"
             allowFullScreen="true">
-        </iframe> -->
-
+        </iframe>
+        @elseif(auth()->user()->teams->first()->name == 'Mafa')
         <iframe 
             title="Mafa Analysis Report" 
             class="w-full h-full border-none"
@@ -14,5 +15,8 @@
             frameborder="0" 
             allowFullScreen="true">
         </iframe>
+        @else
+            <p>No report available</p>
+        @endif
     </div>
 </x-filament-panels::page>

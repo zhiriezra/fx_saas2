@@ -112,6 +112,14 @@ class User extends Authenticatable implements HasName, HasTenants, FilamentUser
             }
         }
 
+        if ($panel->getId() === 'partners') {
+            $user = auth()->user();
+            $userTeam = $user->teams->first();
+            if($userTeam->team_type->name == 'partners'){
+                return true;
+            }
+        }
+
         return false;
 
     }
