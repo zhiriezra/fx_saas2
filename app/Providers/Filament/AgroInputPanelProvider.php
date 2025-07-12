@@ -50,7 +50,7 @@ class AgroInputPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/AgroInput/Widgets'), for: 'App\\Filament\\AgroInput\\Widgets')    
+            ->discoverWidgets(in: app_path('Filament/AgroInput/Widgets'), for: 'App\\Filament\\AgroInput\\Widgets')
             ->widgets([
                 // Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,

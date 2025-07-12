@@ -34,13 +34,6 @@ class VendorResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
-    public static function getNavigationBadge(): ?string
-    {
-        $tenant = Filament::getTenant();
-
-        return static::getModel()::where('team_id', $tenant->id ?? null)->count();
-    }
-
     public static function form(Form $form): Form
     {
         return $form

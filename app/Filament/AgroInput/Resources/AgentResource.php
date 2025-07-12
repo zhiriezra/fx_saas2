@@ -31,13 +31,6 @@ class AgentResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
-    public static function getNavigationBadge(): ?string
-    {
-        $tenant = Filament::getTenant();
-
-        return static::getModel()::where('team_id', $tenant->id ?? null)->count();
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -190,7 +183,10 @@ class AgentResource extends Resource
                             ->label('BVN'),
                         TextEntry::make('nin')
                             ->label('NIN'),
-                    ])->columns(4),
+                    ])
+                    ->columns(4)
+                    ->collapsible()
+                    ->collapsed(),
 
                 Section::make('Location Information')
                     ->description('')
@@ -209,7 +205,10 @@ class AgentResource extends Resource
                             ->label('Latitude'),
                         TextEntry::make('lng')
                             ->label('Longitude'),
-                    ])->columns(4),
+                    ])
+                    ->columns(4)
+                    ->collapsible()
+                    ->collapsed(),
 
                 Section::make('Other Information')
                     ->description('')
@@ -221,7 +220,9 @@ class AgentResource extends Resource
                             ->label('Do you have Bike'),
                         TextEntry::make('tablet')
                             ->label('Do you have Tablet'),
-                    ])->columns(4),
+                    ])
+                    ->columns(4)
+                    ->collapsible(),
 
             ]);
     }
