@@ -3,11 +3,9 @@
 namespace App\Filament\AgroInput\Resources\VendorResource\Pages;
 
 use App\Filament\AgroInput\Resources\VendorResource;
-use App\Filament\AgroInput\Resources\VendorResource\Widgets\HubsMonthlyPerformanceRevenue;
-use App\Filament\AgroInput\Resources\VendorResource\Widgets\TopProductsTable;
-use App\Filament\AgroInput\Widgets\TrainingChart;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\AgroInput\Pages\VendorAnalytics;
 
 class ListVendors extends ListRecords
 {
@@ -16,14 +14,16 @@ class ListVendors extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            HubsMonthlyPerformanceRevenue::class,
-            TopProductsTable::class,
         ];
     }
 
     protected function getHeaderActions(): array
     {
         return [
+            Actions\Action::make('vendor-analytics')
+                ->label('Agro Dealers Analytics')
+                ->url(fn() => VendorAnalytics::getUrl())
+                ->icon('heroicon-o-chart-bar'),
             // Actions\CreateAction::make(),
         ];
     }

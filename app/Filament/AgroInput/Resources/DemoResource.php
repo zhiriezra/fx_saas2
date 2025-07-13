@@ -33,7 +33,7 @@ class DemoResource extends Resource
 
 
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

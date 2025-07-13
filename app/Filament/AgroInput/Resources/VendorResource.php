@@ -24,15 +24,15 @@ class VendorResource extends Resource
 {
     protected static ?string $model = Vendor::class;
 
-    protected static ?string $navigationLabel = 'Hubs';
+    protected static ?string $navigationLabel = 'Agro Dealers';
 
-    protected static ?string $modelLabel = 'Hubs';
+    protected static ?string $modelLabel = 'Agro Dealers';
 
     protected static ?string $navigationIcon = 'heroicon-o-building-storefront';
 
     protected static ?string $navigationGroup = 'Sales';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -187,35 +187,76 @@ class VendorResource extends Resource
     public static function infolist(Infolist $infolist): Infolist{
         return $infolist
             ->schema([
-                Section::make('Business Information')
-                    ->description('Business Information')
+                Section::make('Business Overview')
+                    ->description('A summary of the vendor\'s business profile')
+                    ->icon('heroicon-o-building-storefront')
+                    ->collapsible()
+                    ->collapsed()
                     ->schema([
                         TextEntry::make('business_name')
-                            ->label('Business Name'),
+                            ->label('Business Name')
+                            ->icon('heroicon-o-briefcase')
+                            ->badge()
+                            ->color('primary'),
                         TextEntry::make('business_address')
-                            ->label('Business Address'),
-                        TextEntry::make('Identification Information')
-                            ->getStateUsing(fn($record) => $record->identification_mode . ' - ' . $record->identification_no),
-                        TextEntry::make('registration_no')
-                            ->label('CAC Registration Number'),
+                            ->label('Business Address')
+                            ->icon('heroicon-o-map-pin')
+                            ->color('gray'),
                         TextEntry::make('business_email')
-                            ->label('Business Email'),
+                            ->label('Business Email')
+                            ->icon('heroicon-o-envelope')
+                            ->copyable()
+                            ->color('info'),
                         TextEntry::make('business_mobile')
-                            ->label('Business Mobile'),
+                            ->label('Business Mobile')
+                            ->icon('heroicon-o-phone')
+                            ->copyable()
+                            ->color('success'),
+                        TextEntry::make('registration_no')
+                            ->label('CAC Registration Number')
+                            ->icon('heroicon-o-identification')
+                            ->color('warning'),
+                        TextEntry::make('Identification Information')
+                            ->label('Identification')
+                            ->icon('heroicon-o-identification')
+                            ->color('secondary')
+                            ->getStateUsing(fn($record) => $record->identification_mode . ' - ' . $record->identification_no),
+                    ])
+                    ->columns([
+                        'sm' => 1,
+                        'md' => 2,
+                        'lg' => 3,
+                    ]),
 
-                    ])->columns(3),
-                Section::make('Bank Information')
-                    ->description('Bank Information')
+                Section::make('Bank & Tax Details')
+                    ->description('Banking and tax identification information')
+                    ->icon('heroicon-o-banknotes')
+                    ->collapsible()
+                    ->collapsed()
                     ->schema([
                         TextEntry::make('bank.name')
-                            ->label('Bank'),
+                            ->label('Bank')
+                            ->icon('heroicon-o-banknotes')
+                            ->color('primary'),
                         TextEntry::make('account_no')
-                            ->label('Account Number'),
+                            ->label('Account Number')
+                            ->icon('heroicon-o-credit-card')
+                            ->copyable()
+                            ->color('info'),
                         TextEntry::make('account_name')
-                            ->label('Account Name'),
+                            ->label('Account Name')
+                            ->icon('heroicon-o-user')
+                            ->color('success'),
                         TextEntry::make('tin')
-                            ->label('TIN'),
-                    ])->columns(4),
+                            ->label('TIN')
+                            ->icon('heroicon-o-document-text')
+                            ->color('warning'),
+                    ])
+                    ->columns([
+                        'sm' => 1,
+                        'md' => 2,
+                        'lg' => 4,
+                    ]),
 
             ]);
     }

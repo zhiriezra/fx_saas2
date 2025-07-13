@@ -72,4 +72,9 @@ class Training extends Model
     {
         return $this->belongsTo(Lga::class);
     }
+
+    public function participants()
+    {
+        return $this->hasMany(TrainingAttendance::class);
+    }
 }
