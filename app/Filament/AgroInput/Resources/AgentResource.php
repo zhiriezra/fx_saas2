@@ -254,7 +254,7 @@ class AgentResource extends Resource
                             ->color('success'),
                         TextEntry::make('current_location')
                             ->label('Current Location')
-                            ->icon('heroicon-o-location-marker')
+                            // ->icon('heroicon-o-location-marker')
                             ->markdown()
                             ->color('warning'),
                         TextEntry::make('permanent_address')
