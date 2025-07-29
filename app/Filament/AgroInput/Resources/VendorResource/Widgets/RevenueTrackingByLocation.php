@@ -38,37 +38,40 @@ class RevenueTrackingByLocation extends BaseWidget
     {
         $tenantId = Filament::getTenant()->id;
         
+        $query = Order::query()
+            ->select([
+                DB::raw('CONCAT(states.id, "-", lgas.id) as record_key'),
+                'states.name as state_name',
+                'lgas.name as lga_name',
+                DB::raw('COUNT(DISTINCT orders.id) as total_orders'),
+                DB::raw('SUM(order_items.quantity) as total_quantity'),
+                DB::raw('SUM(order_items.quantity * order_items.agent_price) as total_revenue'),
+                DB::raw('AVG(order_items.agent_price) as avg_unit_price'),
+                DB::raw('COUNT(DISTINCT orders.farmer_id) as unique_farmers'),
+                DB::raw('COUNT(DISTINCT orders.agent_id) as unique_agents'),
+                DB::raw('ROUND(SUM(order_items.quantity * order_items.agent_price) / COUNT(DISTINCT orders.id), 2) as avg_order_value'),
+                // Market penetration rate (farmers served vs estimated total)
+                DB::raw('ROUND((COUNT(DISTINCT orders.farmer_id) / 1000) * 100, 2) as market_penetration'),
+                // Customer retention rate (farmers with multiple orders)
+                DB::raw('ROUND((COUNT(DISTINCT CASE WHEN farmer_order_counts.order_count > 1 THEN orders.farmer_id END) / COUNT(DISTINCT orders.farmer_id)) * 100, 2) as retention_rate'),
+                // Product diversity (unique products sold)
+                DB::raw('COUNT(DISTINCT products.id) as product_diversity')
+            ])
+            ->join('order_items', 'orders.id', '=', 'order_items.order_id')
+            ->join('products', 'order_items.product_id', '=', 'products.id')
+            ->join('vendors', 'products.vendor_id', '=', 'vendors.id')
+            ->join('states', 'vendors.state_id', '=', 'states.id')
+            ->join('lgas', 'vendors.lga_id', '=', 'lgas.id')
+            ->leftJoin(DB::raw('(SELECT farmer_id, COUNT(*) as order_count FROM orders GROUP BY farmer_id) as farmer_order_counts'), 'orders.farmer_id', '=', 'farmer_order_counts.farmer_id')
+            ->where('vendors.team_id', $tenantId)
+            ->groupBy('states.id', 'states.name', 'lgas.id', 'lgas.name')
+            ->orderBy('total_revenue', 'desc');
+
+        // Debug: Log the SQL and bindings
+        \Log::info($query->toSql(), $query->getBindings());
+
         return $table
-            ->query(
-                Order::query()
-                    ->select([
-                        DB::raw('CONCAT(states.id, "-", lgas.id) as record_key'),
-                        'states.name as state_name',
-                        'lgas.name as lga_name',
-                        DB::raw('COUNT(DISTINCT orders.id) as total_orders'),
-                        DB::raw('SUM(order_items.quantity) as total_quantity'),
-                        DB::raw('SUM(order_items.quantity * order_items.agent_price) as total_revenue'),
-                        DB::raw('AVG(order_items.agent_price) as avg_unit_price'),
-                        DB::raw('COUNT(DISTINCT orders.farmer_id) as unique_farmers'),
-                        DB::raw('COUNT(DISTINCT orders.agent_id) as unique_agents'),
-                        DB::raw('ROUND(SUM(order_items.quantity * order_items.agent_price) / COUNT(DISTINCT orders.id), 2) as avg_order_value'),
-                        // Market penetration rate (farmers served vs estimated total)
-                        DB::raw('ROUND((COUNT(DISTINCT orders.farmer_id) / 1000) * 100, 2) as market_penetration'),
-                        // Customer retention rate (farmers with multiple orders)
-                        DB::raw('ROUND((COUNT(DISTINCT CASE WHEN farmer_order_counts.order_count > 1 THEN orders.farmer_id END) / COUNT(DISTINCT orders.farmer_id)) * 100, 2) as retention_rate'),
-                        // Product diversity (unique products sold)
-                        DB::raw('COUNT(DISTINCT products.id) as product_diversity')
-                    ])
-                    ->join('order_items', 'orders.id', '=', 'order_items.order_id')
-                    ->join('products', 'order_items.product_id', '=', 'products.id')
-                    ->join('vendors', 'products.vendor_id', '=', 'vendors.id')
-                    ->join('states', 'vendors.state_id', '=', 'states.id')
-                    ->join('lgas', 'vendors.lga_id', '=', 'lgas.id')
-                    ->leftJoin(DB::raw('(SELECT farmer_id, COUNT(*) as order_count FROM orders GROUP BY farmer_id) as farmer_order_counts'), 'orders.farmer_id', '=', 'farmer_order_counts.farmer_id')
-                    ->where('vendors.team_id', $tenantId)
-                    ->groupBy('states.id', 'states.name', 'lgas.id', 'lgas.name')
-                    ->orderBy('total_revenue', 'desc')
-            )
+            ->query($query)
             ->columns([
                 TextColumn::make('state_name')
                     ->label('State')
