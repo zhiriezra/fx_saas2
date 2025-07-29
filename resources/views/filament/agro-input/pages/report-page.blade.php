@@ -1,6 +1,6 @@
 <x-filament-panels::page>
     <div class="w-full h-screen">
-        @if(auth()->user()->teams->first()->name == 'FMAN')
+        @if(auth()->user()->teams->first()->name == 'Golden Fertiliser')
         <iframe
             title="FMAN Report"
             class="w-full h-full border-none"
