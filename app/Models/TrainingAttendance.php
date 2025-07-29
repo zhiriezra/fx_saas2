@@ -5,13 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class TrainingAttendance extends Model
 {
     use HasFactory;
 
-    public function product()
+    protected $fillable = [
+        'training_id',
+        'agent_id',
+        'farmer_id',
+    ];
+
+    public function training()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Training::class);
     }
 
     public function agent()
@@ -19,17 +25,8 @@ class Order extends Model
         return $this->belongsTo(Agent::class);
     }
 
-    public function vendor(){
-        return $this->belongsTo(Vendor::class);
-    }
-
     public function farmer()
     {
         return $this->belongsTo(Farmer::class);
-    }
-
-    public function orderItems()
-    {
-        return $this->hasMany(OrderItem::class);
     }
 }

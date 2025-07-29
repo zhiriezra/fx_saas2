@@ -29,13 +29,6 @@ class CompetitionProductPricingResource extends Resource
     protected static ?string $navigationLabel = 'Competition Products';
     protected static ?string $modelLabel = 'Competition Product';
 
-    public static function getNavigationBadge(): ?string
-    {
-        $tenant = Filament::getTenant();
-
-        return static::getModel()::where('team_id', $tenant->id ?? null)->count();
-    }
-
     public static function form(Form $form): Form
     {
         return $form

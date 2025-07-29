@@ -3,9 +3,9 @@
 namespace App\Filament\AgroInput\Resources\AgentResource\Pages;
 
 use App\Filament\AgroInput\Resources\AgentResource;
-use App\Filament\AgroInput\Resources\AgentResource\Widgets\AgentStatsOverview;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\AgroInput\Pages\AgentAnalyticPage;
 
 class ListAgents extends ListRecords
 {
@@ -14,14 +14,17 @@ class ListAgents extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\Action::make('agent-analytics')
+                ->label('Agent Analytics')
+                ->url(fn() => AgentAnalyticPage::getUrl())
+                ->icon('heroicon-o-chart-bar'),
+            // Actions\CreateAction::make(),
         ];
     }
 
     protected function getHeaderWidgets(): array
     {
         return [
-            AgentStatsOverview::class,
         ];
     }
 }

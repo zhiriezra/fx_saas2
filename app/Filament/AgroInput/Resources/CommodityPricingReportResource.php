@@ -29,13 +29,6 @@ class CommodityPricingReportResource extends Resource
 
     protected static ?string $modelLabel = 'Weekly Commodity Pricing Updates';
 
-    public static function getNavigationBadge(): ?string
-    {
-        $tenant = Filament::getTenant();
-
-        return static::getModel()::where('team_id', $tenant->id ?? null)->count();
-    }
-
     public static function form(Form $form): Form
     {
         return $form
