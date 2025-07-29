@@ -4,7 +4,7 @@
         <iframe
             title="FMAN Report"
             class="w-full h-full border-none"
-            src="https://app.powerbi.com/view?r=eyJrIjoiMDE3ZGRmZDctZTJmMS00MTNiLThkMjgtMDc1MTY2NDk1YzZmIiwidCI6IjY0ODMzYzU4LWFjYzQtNDFlMy1iZDk2LWYxZWUxOWE3NzZmMSJ9&pageName=c86f1232309db1bbce9d" frameborder="0"
+            src="https://app.powerbi.com/view?r=eyJrIjoiNjEwMmFmMzQtNmQ0Mi00NTVkLWFjYzUtMGE3MThiNmRjNTA2IiwidCI6IjU4ODBmZDMzLTYyZmEtNGM0Ny1iYTFmLWJhMWE1ODM5Mjc2NyJ9" frameborder="0"
             allowFullScreen="true">
         </iframe>
         @elseif(auth()->user()->teams->first()->name == 'Mafa')
