@@ -16,7 +16,13 @@
             allowFullScreen="true">
         </iframe>
         @else
-            <p>No report available</p>
+        <iframe 
+            title="Mafa Analysis Report" 
+            class="w-full h-full border-none"
+            src="https://app.powerbi.com/view?r=eyJrIjoiMzYzNGZlMDQtZWU0Ni00OTU4LTkyNTItODhkNTZkMDlmYTM1IiwidCI6IjU4ODBmZDMzLTYyZmEtNGM0Ny1iYTFmLWJhMWE1ODM5Mjc2NyJ9" 
+            frameborder="0" 
+            allowFullScreen="true">
+        </iframe>
         @endif
     </div>
 </x-filament-panels::page>

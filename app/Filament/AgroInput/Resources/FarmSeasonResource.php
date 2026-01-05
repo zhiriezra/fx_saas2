@@ -4,33 +4,24 @@ namespace App\Filament\AgroInput\Resources;
 
 use App\Filament\AgroInput\Resources\FarmSeasonResource\Pages;
 use App\Filament\AgroInput\Resources\FarmSeasonResource\RelationManagers;
-use App\Filament\AgroInput\Resources\FarmSeasonResource\RelationManagers\FarmVisitationsRelationManager;
 use App\Models\FarmSeason;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Infolists\Components\Section;
-use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\Filter;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Facades\Filament;
-
 
 class FarmSeasonResource extends Resource
 {
     protected static ?string $model = FarmSeason::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Farm Management';
+    protected static ?string $navigationGroup = 'Sales';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {
@@ -38,13 +29,21 @@ class FarmSeasonResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('uuid')
                     ->label('UUID')
-                    ->maxLength(36)
-                    ->default(null),
+                    ->maxLength(36),
                 Forms\Components\TextInput::make('team_id')
-                    ->numeric()
-                    ->default(null),
+                    ->numeric(),
                 Forms\Components\Select::make('farm_id')
                     ->relationship('farm', 'id')
+                    ->required(),
+                Forms\Components\TextInput::make('season')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('budget')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('goal')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('report')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('farm_status')
                     ->required(),
                 Forms\Components\DatePicker::make('planted_date')
                     ->required(),
@@ -64,28 +63,29 @@ class FarmSeasonResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('farm.code')
+                    ->label('Farm code')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('season_year')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('commodity')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('season')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('budget')
+                    ->money('NGN')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('goal')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('report')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('farm_status'),
                 Tables\Columns\TextColumn::make('planted_date')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('harvest_date')
                     ->date()
                     ->sortable(),
-                TextColumn::make('state')
-                    ->getStateUsing(fn($record) => $record->farm->state->name),
-                TextColumn::make('lga')
-                    ->getStateUsing(fn($record) => $record->farm->lga->name),
-                TextColumn::make('Location Description')
-                    ->getStateUsing(fn($record) => $record->farm->address),
-                TextColumn::make('latitude')
-                    ->getStateUsing(fn($record) => $record->farm->lat),
-                TextColumn::make('longitude')
-                    ->getStateUsing(fn($record) => $record->farm->long),
-                Tables\Columns\TextColumn::make('season_year')
-                    ->searchable(),
-                Tables\Columns\IconColumn::make('status')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
@@ -100,18 +100,10 @@ class FarmSeasonResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('State')
-                    ->relationship('state', 'name')
-                    ->searchable()
-                    ->preload(),
-                SelectFilter::make('Lga')
-                    ->relationship('lga', 'name')
-                    ->searchable()
-                    ->preload(),
+                //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -120,62 +112,10 @@ class FarmSeasonResource extends Resource
             ]);
     }
 
-    public static function infoList(Infolist $infolist): Infolist
-    {
-        return $infolist
-            ->schema([
-                Section::make('Season Information')
-                    ->schema([
-                        TextEntry::make('commodity'),
-                        TextEntry::make('planted_date')
-                            ->label('Planted Date'),
-                        TextEntry::make('harvest_date')
-                            ->label('Harvest Date'),
-                        TextEntry::make('season_year')
-                            ->label('Season Year'),
-                    ])->columns(4),
-                Section::make('Farmer Information')
-                    ->schema([
-                        TextEntry::make('Name')
-                            ->getStateUsing(fn($record) => $record->farm->farmer->fname . ' ' . $record->farm->farmer->mname . ' ' . $record->farm->farmer->lname),
-                        TextEntry::make('Mobile')
-                            ->getStateUsing(fn($record) => $record->farm->farmer->mobile_no),
-                        TextEntry::make('Address')
-                            ->getStateUsing(fn($record) => $record->farm->farmer->contact_address),
-                        TextEntry::make('Marital Status')
-                            ->getStateUsing(fn($record) => $record->farm->farmer->marital_status),
-                        TextEntry::make('Gender')
-                            ->getStateUsing(fn($record) => $record->farm->farmer->gender),
-                        TextEntry::make('Date of Birth')
-                            ->getStateUsing(fn($record) => $record->farm->farmer->dob),
-                        TextEntry::make('Disability')
-                            ->getStateUsing(fn($record) => $record->farm->farmer->disability),
-                        TextEntry::make('Cooperative')
-                            ->getStateUsing(fn($record) => $record->farm->farmer->cooperative_name),
-
-                        TextEntry::make('farm.size')
-                            ->label('Farm Size'),
-                    ])->columns(4),
-                Section::make('Farm Location')
-                    ->schema([
-                        TextEntry::make('farm.state.name')
-                            ->label('State'),
-                        TextEntry::make('farm.lga.name')
-                            ->label('LGA'),
-                        TextEntry::make('farm.address')
-                            ->label('Location Description'),
-                        TextEntry::make('farm.lat')
-                            ->label('Latitude'),
-                        TextEntry::make('farm.long')
-                            ->label('Longitude'),
-                    ])->columns(3),
-            ]);
-    }
-
     public static function getRelations(): array
     {
         return [
-            FarmVisitationsRelationManager::class,
+            //
         ];
     }
 
@@ -183,9 +123,8 @@ class FarmSeasonResource extends Resource
     {
         return [
             'index' => Pages\ListFarmSeasons::route('/'),
-            'create' => Pages\CreateFarmSeason::route('/create'),
-            'view' => Pages\ViewFarmSeason::route('/{record}'),
-            'edit' => Pages\EditFarmSeason::route('/{record}/edit'),
+            // 'create' => Pages\CreateFarmSeason::route('/create'),
+            // 'edit' => Pages\EditFarmSeason::route('/{record}/edit'),
         ];
     }
 }
