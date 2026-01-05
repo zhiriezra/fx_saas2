@@ -26,6 +26,6 @@ class VerifyUserRole
             $team_type = TeamType::where('id', $team->team_type_id)->first();
             return redirect('/'.$team_type->slug.'/'.$team->slug);
         }
-        abort(403, 'You are not allowed to access this panel');
+        abort(403, 'You are not allowed to access this panels');
     }
 }
