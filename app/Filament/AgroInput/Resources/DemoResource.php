@@ -19,6 +19,8 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Facades\Filament;
+
 
 class DemoResource extends Resource
 {
@@ -27,16 +29,11 @@ class DemoResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Sales';
     protected static ?string $navigationLabel = 'Demos';
-    protected static ?string $modelLabel = 'Demos';
+    protected static ?string $modelLabel = 'Demonstration Plot';
 
 
 
     protected static ?int $navigationSort = 3;
-
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
 
     public static function form(Form $form): Form
     {

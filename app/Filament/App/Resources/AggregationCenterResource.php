@@ -25,11 +25,6 @@ class AggregationCenterResource extends Resource
 
     protected static ?string $navigationGroup = 'Aggregations';
 
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -107,7 +102,7 @@ class AggregationCenterResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -127,9 +122,9 @@ class AggregationCenterResource extends Resource
     {
         return [
             'index' => Pages\ListAggregationCenters::route('/'),
-            'create' => Pages\CreateAggregationCenter::route('/create'),
+            // 'create' => Pages\CreateAggregationCenter::route('/create'),
             'view' => Pages\ViewAggregationCenter::route('/{record}'),
-            'edit' => Pages\EditAggregationCenter::route('/{record}/edit'),
+            // 'edit' => Pages\EditAggregationCenter::route('/{record}/edit'),
         ];
     }
 }

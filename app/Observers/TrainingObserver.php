@@ -23,7 +23,10 @@ class TrainingObserver
      */
     public function updated(Training $training): void
     {
-        //
+        if(auth()->user() && !$training->team_id){
+            $training->team_id = auth()->user()->team_id;
+            $training->save();
+        }
     }
 
     /**

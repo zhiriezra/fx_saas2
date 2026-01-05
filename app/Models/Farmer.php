@@ -36,7 +36,13 @@ class Farmer extends Model
 
     public function team()
     {
-        return $this->belongsTo(Team::class);
+        return $this->hasOneThrough(
+            Team::class,
+            Agent::class,
+            'id', // Foreign key on agents table
+            'id', // Foreign key on teams table
+            'agent_id', // Local key on farmers table
+            'team_id' // Local key on agents table
+        );
     }
-
 }

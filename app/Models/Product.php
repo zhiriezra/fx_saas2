@@ -13,18 +13,37 @@ class Product extends Model
     {
         return $this->belongsTo(Team::class);
     }
-    
+
     public function vendor(){
         return $this->belongsTo(Vendor::class);
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function subcategory(){
-        return $this->belongsTo(Subcategory::class);
+    public function subcategory()
+    {
+        return $this->belongsTo(SubCategory::class, 'sub_category_id');
     }
 
+    public function escrow(){
+        return $this->hasMany(Escrow::class);
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
+    }
+
+    public function manufacturer_product()
+    {
+        return $this->belongsTo(ManufacturerProduct::class);
+    }
+
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 
 }

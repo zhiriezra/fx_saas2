@@ -11,6 +11,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Columns\ImageColumn;
 
 class ProductsRelationManager extends RelationManager
 {
@@ -31,20 +32,24 @@ class ProductsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('description'),
-                TextColumn::make('category.name'),
-                TextColumn::make('subcategory.name'),
-                TextColumn::make('manufacturer'),
-                TextColumn::make('agent_price')
-                    ->money('NGN'),
+                ImageColumn::make('manufacturer_product.image')
+                    ->circular()
+                    ->height(60)
+                    ->width(60)
+                    ->label('Image'),
+                TextColumn::make('manufacturer_product.name')
+                    ->label('Product Name'),
+                TextColumn::make('manufacturer_product.manufacturer.name'),
+                TextColumn::make('manufacturer_product.sub_category.category.name'),
+                TextColumn::make('manufacturer_product.sub_category.name'),
                 TextColumn::make('unit_price')
                     ->money('NGN'),
-                TextColumn::make('quantity'),
-                TextColumn::make('stock_date'),
-
-
-
+                TextColumn::make('agent_price')
+                    ->money('NGN'),
+                TextColumn::make('quantity')
+                    ->numeric(),
+                TextColumn::make('stock_date')
+                    ->label('Stock Date'),
             ])
             ->filters([
                 //

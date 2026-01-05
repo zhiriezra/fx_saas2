@@ -27,6 +27,5 @@ class VerifyUserRole
             return redirect('/'.$team_type->slug.'/'.$team->slug);
         }
         abort(403, 'You are not allowed to access this panel');
-        return $next($request);
     }
 }

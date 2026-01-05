@@ -15,6 +15,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
+use Filament\Facades\Filament;
 
 class CommodityPricingReportResource extends Resource
 {
@@ -27,11 +28,6 @@ class CommodityPricingReportResource extends Resource
     protected static ?string $navigationLabel = 'Weekly Commodity Updates';
 
     protected static ?string $modelLabel = 'Weekly Commodity Pricing Updates';
-
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
 
     public static function form(Form $form): Form
     {

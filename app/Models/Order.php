@@ -19,8 +19,17 @@ class Order extends Model
         return $this->belongsTo(Agent::class);
     }
 
+    public function vendor(){
+        return $this->belongsTo(Vendor::class);
+    }
+
     public function farmer()
     {
         return $this->belongsTo(Farmer::class);
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }
