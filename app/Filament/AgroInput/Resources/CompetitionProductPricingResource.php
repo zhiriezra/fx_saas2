@@ -15,6 +15,8 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Collection;
+use Filament\Facades\Filament;
+
 
 class CompetitionProductPricingResource extends Resource
 {
@@ -26,11 +28,6 @@ class CompetitionProductPricingResource extends Resource
     protected static ?int $navigationSort = 2;
     protected static ?string $navigationLabel = 'Competition Products';
     protected static ?string $modelLabel = 'Competition Product';
-
-    public static function getNavigationBadge(): ?string
-    {
-        return static::getModel()::count();
-    }
 
     public static function form(Form $form): Form
     {

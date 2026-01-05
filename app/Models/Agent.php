@@ -10,14 +10,7 @@ class Agent extends Model
 {
     use HasFactory;
 
-    // protected static function booted(): void
-    // {
-    //     static::addGlobalScope('current_team', function (Builder $query) {
-    //         if (auth()->user()->isTeam()) {
-    //             $query->where('current_team_id', auth()->user()->current_team_id);
-    //         }
-    //     });
-    // }
+    protected $guarded = [''];
 
     public function user()
     {

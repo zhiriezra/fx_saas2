@@ -2,10 +2,13 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\AgroInput\Pages\ChangePasswordPage;
+use App\Models\Team;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -27,17 +30,25 @@ class AppPanelProvider extends PanelProvider
             ->id('agro-processors')
             ->path('agro-processors')
             ->login()
-            ->brandLogo('https://farmex.extensionafrica.com/assets/farmex-logo-main-with-tagline.png')
+            ->favicon(asset('logos/farmex.png'))
+            ->brandLogo('https://farmex.extensionafrica.com/images/farmex-logo-main-with-tagline.png')
             ->brandLogoHeight('3rem')
+            ->profile()
             ->navigationGroups([
                 'Aggregations',
                 'Sales Information',
                 'Value-chain Information'
             ])
+            ->userMenuItems([
+                MenuItem::make()
+                ->url(fn (): string => ChangePasswordPage::getUrl())
+                ->label('Change Password')
+                ->icon('heroicon-o-lock-closed')
+
+            ])
             ->colors([
                 'primary' => '#287e36',
             ])
-            ->defaultThemeMode(ThemeMode::Dark)
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
             ->pages([
@@ -61,6 +72,8 @@ class AppPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->tenant(Team::class, ownershipRelationship: 'team')
+            ->tenant(Team::class, slugAttribute: 'slug');
     }
 }
