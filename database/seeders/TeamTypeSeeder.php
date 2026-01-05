@@ -16,21 +16,21 @@ class TeamTypeSeeder extends Seeder
         //create team types
         TeamType::create([
             'name' => 'Extension Africa',
-            'slug' => 'extension_africa',
+            'slug' => 'extension-africa',
             'description' => 'Extension Africa',
             'status' => true,
         ]);
 
         TeamType::create([
             'name' => 'Agro Input',
-            'slug' => 'agro_input',
+            'slug' => 'agro-input',
             'description' => 'Agro Input is a team type for Agro Input users',
             'status' => true,
         ]);
 
         TeamType::create([
             'name' => 'Agro Processor',
-            'slug' => 'agro_processor',
+            'slug' => 'agro-processor',
             'description' => 'Agro Processors is a team type for Agro Processors users',
             'status' => true,
         ]);

@@ -2,7 +2,6 @@
 
 namespace App\Filament\App\Resources;
 
-use App\Filament\App\Resources\AggregationCenterResource\Pages;
 use App\Filament\App\Resources\AggregationCenterResource\RelationManagers;
 use App\Models\AggregationCenter;
 use App\Models\Lga;
@@ -121,10 +120,7 @@ class AggregationCenterResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAggregationCenters::route('/'),
-            // 'create' => Pages\CreateAggregationCenter::route('/create'),
-            'view' => Pages\ViewAggregationCenter::route('/{record}'),
-            // 'edit' => Pages\EditAggregationCenter::route('/{record}/edit'),
+            //
         ];
     }
 }
