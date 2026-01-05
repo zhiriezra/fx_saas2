@@ -8,5 +8,6 @@ use Filament\Resources\Pages\CreateRecord;
 
 class CreateDemo extends CreateRecord
 {
+    
     protected static string $resource = DemoResource::class;
 }
