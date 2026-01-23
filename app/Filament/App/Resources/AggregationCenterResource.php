@@ -121,9 +121,9 @@ class AggregationCenterResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAggregationCenters::route('/'),
+            // 'index' => Pages\ListAggregationCenters::route('/'),
             // 'create' => Pages\CreateAggregationCenter::route('/create'),
-            'view' => Pages\ViewAggregationCenter::route('/{record}'),
+            // 'view' => Pages\ViewAggregationCenter::route('/{record}'),
             // 'edit' => Pages\EditAggregationCenter::route('/{record}/edit'),
         ];
     }
