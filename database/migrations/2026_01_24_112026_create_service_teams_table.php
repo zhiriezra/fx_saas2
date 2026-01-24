@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('service_settings', function (Blueprint $table) {
+        Schema::create('service_teams', function (Blueprint $table) {
             $table->id();
             $table->foreignId('service_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->text('value');
-            $table->foreignId('unit_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('team_id')->constrained()->cascadeOnDelete();
+            $table->integer('value')->default(0);
+            $table->string('duration');
+            $table->float('price')->default(0.00);
+            $table->string('start_date');
+            $table->string('end_date');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('service_settings');
+        Schema::dropIfExists('service_teams');
     }
 };

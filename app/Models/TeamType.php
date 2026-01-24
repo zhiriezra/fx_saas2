@@ -14,4 +14,12 @@ class TeamType extends Model
     {
         return $this->hasMany(Team::class);
     }
+
+    /**
+     * Get the services for the team type.
+     */
+    public function services(): HasMany
+    {
+        return $this->hasMany(Service::class);
+    }
 }

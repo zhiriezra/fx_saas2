@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('features', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('value');
+            $table->float('value')->default(0.00);
+            $table->string('icon')->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
         });
