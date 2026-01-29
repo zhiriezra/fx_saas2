@@ -91,6 +91,23 @@ class AgentResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('assignTeam')
+                    ->label('Assign to Team')
+                    ->icon('heroicon-o-user-group')
+                    ->form([
+                        Forms\Components\Select::make('team_id')
+                            ->label('Team')
+                            ->options(Team::all()->pluck('name', 'id'))
+                            ->searchable()
+                            ->required()
+                            ->default(fn (Agent $record) => $record->team_id),
+                    ])
+                    ->action(function (Agent $record, array $data): void {
+                        $record->update([
+                            'team_id' => $data['team_id'],
+                        ]);
+                    })
+                    ->successNotificationTitle('Agent assigned to team successfully'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
