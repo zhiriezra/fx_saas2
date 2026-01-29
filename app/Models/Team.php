@@ -37,6 +37,9 @@ class Team extends Model implements HasAvatar
         return $this->belongsTo(TeamType::class);
     }
 
-
+    public function visitations(): HasMany
+    {
+        return $this->hasMany(TeamVisitation::class);
+    }
 
 }
