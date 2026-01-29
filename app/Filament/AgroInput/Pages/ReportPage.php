@@ -14,4 +14,17 @@ class ReportPage extends Page
 
     protected static ?string $navigationLabel = 'Monitoring & Evaluation Report';
 
+    public function getVisitations()
+    {
+        $team = auth()->user()->teams->first();
+        
+        if (!$team) {
+            return collect();
+        }
+
+        return $team->visitations()
+            ->where('active', true)
+            ->orderBy('id')
+            ->get();
+    }
 }
