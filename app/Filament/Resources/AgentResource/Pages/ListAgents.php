@@ -19,10 +19,4 @@ class ListAgents extends ListRecords
         ];
     }
 
-    protected function getHeaderWidgets(): array
-    {
-        return [
-            SalesStatsOverviewAgroInput::class,
-        ];
-    }
 }
