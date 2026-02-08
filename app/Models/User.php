@@ -99,7 +99,7 @@ class User extends Authenticatable implements HasName, HasTenants, FilamentUser
         if ($panel->getId() === 'agro-processors') {
             $user = auth()->user();
             $userTeam = $user->teams->first();
-            if($userTeam->team_type->slug == 'agro-processors'){
+            if($userTeam->team_type->slug == 'agro-processors' || $user->isAdmin()){
                 return true;
             }
         }
@@ -107,7 +107,7 @@ class User extends Authenticatable implements HasName, HasTenants, FilamentUser
         if ($panel->getId() === 'agro-input') {
             $user = auth()->user();
             $userTeam = $user->teams->first();
-            if($userTeam->team_type->slug == 'agro-input'){
+            if($userTeam->team_type->slug == 'agro-input' || $user->isAdmin()){
                 return true;
             }
         }
@@ -115,7 +115,7 @@ class User extends Authenticatable implements HasName, HasTenants, FilamentUser
         if ($panel->getId() === 'partners') {
             $user = auth()->user();
             $userTeam = $user->teams->first();
-            if($userTeam->team_type->slug == 'partners'){
+            if($userTeam->team_type->slug == 'partners' || $user->isAdmin()){
                 return true;
             }
         }
