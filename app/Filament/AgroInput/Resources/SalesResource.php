@@ -24,6 +24,7 @@ class SalesResource extends Resource
     protected static ?string $navigationGroup = 'Sales Information';
     protected static ?int $navigationSort = 2;
     protected static ?string $tenantOwnershipRelationshipName = 'team';
+    protected static ?string $navigationIcon = 'heroicon-o-inbox-stack';
 
     public static function form(Form $form): Form
     {
