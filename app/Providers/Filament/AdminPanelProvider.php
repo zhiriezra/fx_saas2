@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\Register as CustomRegisterPage;
 use App\Http\Middleware\VerifyUserRole;
 use Filament\Enums\ThemeMode;
 use Filament\Http\Middleware\Authenticate;
@@ -29,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('app')
             ->path('app')
             ->login()
+            // ->registration(CustomRegisterPage::class)
             ->colors([
                 'primary' => '#287e36',
                 'danger' => '#dc3545',
