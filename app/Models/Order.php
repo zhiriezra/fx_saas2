@@ -32,4 +32,16 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    public function team()
+    {
+        return $this->hasOneThrough(
+            Team::class,
+            Agent::class,
+            'id',
+            'id',
+            'agent_id',
+            'team_id'
+        );
+    }
 }
