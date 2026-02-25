@@ -2,7 +2,7 @@
 
 namespace App\Filament\AgroInput\Resources;
 
-use App\Filament\AgroInput\Resources\OrderResource\Pages;
+use App\Filament\AgroInput\Resources\SalesResource\Pages;
 use App\Models\Order;
 use Filament\Facades\Filament;
 use Filament\Forms\Form;
@@ -11,22 +11,19 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Infolists;
 use Filament\Infolists\Infolist;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components;
 
-class OrderResource extends Resource
+
+class SalesResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static ?string $modelLabel = 'Order Tracking';
-
-    protected static ?string $tenantOwnershipRelationshipName = 'team';
-
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static ?string $modelLabel = 'Track Sales';
+    protected static ?string $navigationLabel = 'Track Sales';
     protected static ?string $navigationGroup = 'Sales Information';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
+    protected static ?string $tenantOwnershipRelationshipName = 'team';
 
     public static function form(Form $form): Form
     {
@@ -38,41 +35,26 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('agent_id')
-                    ->label('Agent Name')
-                    ->getStateUsing(fn ($record) => "{$record->agent->user->firstname} {$record->agent->user->lastname}")
-                    ->searchable(),
+                    ->label('Agent')
+                    ->getStateUsing(fn ($record) => "{$record->agent->user->firstname} {$record->agent->user->lastname}"),
+                TextColumn::make('vendor_location')
+                    ->label('Vendor Location')
+                    ->getStateUsing(fn ($record) => $record->vendor->state->name . ', ' . $record->vendor->lga->name)
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('farmer_id')
-                    ->label('Farmer Name')
-                    ->getStateUsing(fn ($record) => "{$record->farmer->fname} {$record->farmer->lname}")
-                    ->searchable(),
-                
-                TextColumn::make('agent.state.name')
-                    ->label('Location')
-                    ->getStateUsing(fn ($record) => "{$record->agent->state->name}, {$record->agent->lga->name}")
-                    ->searchable(),
+                    ->label('Farmer')
+                    ->getStateUsing(fn ($record) => "{$record->farmer->fname} {$record->farmer->lname}"),
                 TextColumn::make('total_amount')
                     ->label('Total Amount')
-                    ->money('NGN')
-                    ->searchable(),
+                    ->money('NGN'),
                 TextColumn::make('commission')
                     ->label('Commission Earned')
-                    ->money('NGN')
-                    ->searchable(),
+                    ->money('NGN'),
                 TextColumn::make('created_at')
                     ->label('Date')
                     ->date()
                     ->sortable(),
-                TextColumn::make('status')
-                    ->label('Status')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'pending' => 'info',
-                        'completed' => 'success',
-                        'declined' => 'danger',
-                        'supplied' => 'gray',
-                        'accepted' => 'warning',
-                        default => 'gray',
-                    }),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
@@ -88,7 +70,6 @@ class OrderResource extends Resource
                         'Cash' => 'Cash',
                         'Wallet' => 'Wallet',
                     ]),
-
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -120,17 +101,6 @@ class OrderResource extends Resource
                         Components\TextEntry::make('created_at')
                             ->label('Date Made')
                             ->date(),
-                        Components\TextEntry::make('status')
-                            ->label('Status')
-                            ->badge()
-                            ->color(fn (string $state): string => match ($state) {
-                                'pending' => 'info',
-                                'completed' => 'success',
-                                'declined' => 'danger',
-                                'supplied' => 'gray',
-                                'accepted' => 'warning',
-                                default => 'gray',
-                            }),
                     ])->columns(3),
 
                 Components\Section::make('Products')
@@ -186,6 +156,7 @@ class OrderResource extends Resource
     {
         $tenant = Filament::getTenant();
         return parent::getEloquentQuery()
+            ->where('status', 'completed')
             ->when($tenant, fn (Builder $q) => $q->whereHas('agent', fn (Builder $a) => $a->where('team_id', $tenant->id)));
     }
 
@@ -197,8 +168,9 @@ class OrderResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOrders::route('/'),
-            'view' => Pages\ViewOrder::route('/{record}'),
+            'index' => Pages\ListSales::route('/'),
+            'view' => Pages\ViewSale::route('/{record}'),
         ];
     }
 }
+
