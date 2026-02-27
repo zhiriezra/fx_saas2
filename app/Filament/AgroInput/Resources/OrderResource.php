@@ -25,7 +25,7 @@ class OrderResource extends Resource
     protected static ?string $tenantOwnershipRelationshipName = 'team';
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
-    protected static ?string $navigationGroup = 'Sales Information';
+    protected static ?string $navigationGroup = 'Sales';
     protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
@@ -57,7 +57,11 @@ class OrderResource extends Resource
                 TextColumn::make('commission')
                     ->label('Commission Earned')
                     ->money('NGN')
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->searchable(),
+                TextColumn::make('payment_type')
+                    ->label('Payment Type')
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->label('Date')
                     ->date()
