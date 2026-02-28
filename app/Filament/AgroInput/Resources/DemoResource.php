@@ -43,9 +43,9 @@ class DemoResource extends Resource
                     ->label('Agent')
                     ->getStateUsing(fn ($record) => $record->agent?->user?->firstname . ' ' . $record->agent?->user?->lastname)
                     ->searchable(),
-                Tables\Columns\TextColumn::make('farm_id')
-                    ->label('Farm')
-                    ->getStateUsing(fn ($record) => 'Farm #' . $record->farm_id)
+                Tables\Columns\TextColumn::make('code')
+                    ->label('Farm Code')
+                    ->placeholder('Not Provided')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('designation')
                     ->searchable(),
@@ -94,9 +94,9 @@ class DemoResource extends Resource
                         Components\TextEntry::make('agent_name')
                             ->label('Agent')
                             ->getStateUsing(fn (Demo $record) => $record->agent?->user?->firstname . ' ' . $record->agent?->user?->lastname),
-                        Components\TextEntry::make('farm_label')
-                            ->label('Farm')
-                            ->getStateUsing(fn (Demo $record) => 'Farm #' . $record->farm_id),
+                        Components\TextEntry::make('code')
+                            ->label('Farm Code')
+                            ->placeholder('Not Provided'),
                         Components\TextEntry::make('designation')
                             ->label('Designation'),
                         Components\TextEntry::make('stage')

@@ -9,14 +9,6 @@ class CashPurchase extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'agent_id',
-        'vendor_id',
-        'date_purchased',
-        'remark',
-        'status',
-    ];
-
     public function agent()
     {
         return $this->belongsTo(Agent::class);

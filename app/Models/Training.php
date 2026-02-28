@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 // #[ObservedBy([TrainingObserver::class])]
 class Training extends Model
@@ -53,17 +55,17 @@ class Training extends Model
         'males',
     ];
 
-    public function team()
+    public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
     }
 
-    public function agent()
+    public function agent(): BelongsTo
     {
         return $this->belongsTo(Agent::class);
     }
 
-    public function state()
+    public function state(): BelongsTo
     {
         return $this->belongsTo(State::class);
     }
@@ -73,7 +75,7 @@ class Training extends Model
         return $this->belongsTo(Lga::class);
     }
 
-    public function participants()
+    public function participants(): HasMany
     {
         return $this->hasMany(TrainingAttendance::class);
     }

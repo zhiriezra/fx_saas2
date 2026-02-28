@@ -9,24 +9,6 @@ class Demo extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-            'farm_id',
-            'agent_id',
-            'image_file',
-            'designation',
-            'stage',
-            'project_id',
-            'attendance',
-            'male',
-            'female',
-            'season',
-            'crop_id',
-            'demo_type_id',
-            'challenges',
-            'observations',
-            'activity_date',
-        ];
-
     protected $table = 'demos';
 
     protected $guarded = [];
