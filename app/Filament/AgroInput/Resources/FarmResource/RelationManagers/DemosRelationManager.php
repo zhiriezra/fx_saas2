@@ -5,6 +5,7 @@ namespace App\Filament\AgroInput\Resources\FarmResource\RelationManagers;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Filament\Infolists\Infolist;
 use Filament\Infolists\Components as Components;
 use App\Models\Demo;
@@ -12,6 +13,11 @@ use App\Models\Demo;
 class DemosRelationManager extends RelationManager
 {
     protected static string $relationship = 'demos';
+
+    public static function getTitle(EloquentModel $ownerRecord, string $pageClass): string
+    {
+        return 'Demonstration Plots';
+    }
 
     public function table(Table $table): Table
     {
@@ -95,4 +101,3 @@ class DemosRelationManager extends RelationManager
             ->bulkActions([]);
     }
 }
-
