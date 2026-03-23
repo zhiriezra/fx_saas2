@@ -60,16 +60,16 @@
 
     <nav class="hidden md:flex gap-6 text-sm">
       <a href="#features" class="hover:text-primary">Features</a>
-      <a href="#pricing" class="hover:text-primary">Pricing</a>
+      <a href="#benefits" class="hover:text-primary">Benefits</a>
       <a href="#testimonials" class="hover:text-primary">Testimonials</a>
       <a href="#faq" class="hover:text-primary">FAQ</a>
     </nav>
 
     <div class="flex items-center gap-4">
       <a href="/app/login" class="text-sm hover:text-primary">Log in</a>
-      <a href="#"
+      <a href="/quotation"
          class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium shadow hover:bg-primary/90">
-        Get started
+        Quotation
       </a>
     </div>
   </div>
@@ -100,14 +100,14 @@
         </p>
 
         <div class="flex flex-wrap gap-3">
-          <a href="#"
+          <a href="/quotation?type=quote"
              class="bg-primary text-white px-8 py-3 rounded-lg font-medium shadow-lg hover:bg-primary/90">
-            Start free trial
+            Request Quotation
           </a>
 
-          <a href="#features"
+          <a href="/quotation?type=demo"
              class="border border-primary/30 px-8 py-3 rounded-lg font-medium hover:bg-primary/10">
-            See how it works
+            Schedule Demo
           </a>
         </div>
 
@@ -152,18 +152,34 @@
       </div>
 
       <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
-        <i class="ri-flashlight-line text-primary text-3xl"></i>
-        <h3 class="font-semibold text-xl mt-4">Automation</h3>
+        <i class="ri-map-2-line text-primary text-3xl"></i>
+        <h3 class="font-semibold text-xl mt-4">Farm Seasons</h3>
         <p class="text-slate-600 mt-2">
-          Reduce manual work by automating recurring processes.
+          Track land usage and visitations to optimize resource allocation. As well as track linked farm demonstration plots to projects and crops.
         </p>
       </div>
 
       <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
-        <i class="ri-shield-check-line text-primary text-3xl"></i>
-        <h3 class="font-semibold text-xl mt-4">Secure Data</h3>
+        <i class="ri-earth-line text-primary text-3xl"></i>
+        <h3 class="font-semibold text-xl mt-4">Training & M&E</h3>
         <p class="text-slate-600 mt-2">
-          Enterprise-grade security for sensitive operational data.
+          Tack training sessions and attendance as well as Monitoring & Evaluation reports 
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
+        <i class="ri-group-2-line text-primary text-3xl"></i>
+        <h3 class="font-semibold text-xl mt-4">Agents and Farmers</h3>
+        <p class="text-slate-600 mt-2">
+          Manage field agents and farmers with ease, track their activities, assigned tasks and aggregation centers (commodity collected).
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
+        <i class="ri-funds-line text-primary text-3xl"></i>
+        <h3 class="font-semibold text-xl mt-4">Sales & Distribution</h3>
+        <p class="text-slate-600 mt-2">
+          Track Vendors products and orders as well as sales performances.Also track weekly commodity pricing and competitor product.
         </p>
       </div>
 
@@ -171,29 +187,63 @@
   </div>
 </section>
 
-<!-- ================= PRICING ================= -->
-<section id="pricing" class="py-24 bg-gradient-to-b from-white to-slate-50">
-  <div class="container mx-auto px-4 text-center">
+<!-- ================= BENEFITS ================= -->
+<section id="benefits" class="py-24 bg-slate-50">
+  <div class="container mx-auto px-4">
 
-    <span class="bg-primary text-white px-4 py-1 rounded-full text-sm">
-      Pricing
-    </span>
-
-    <h2 class="text-3xl md:text-4xl font-bold mt-4">
-      Flexible pricing for every team
-    </h2>
-
-    <p class="text-slate-600 mt-3 max-w-xl mx-auto">
-      Choose only the services you need and scale as you grow.
-    </p>
-
-    <div class="mt-10">
-      <a href="#"
-         class="bg-primary text-white px-10 py-4 rounded-xl font-medium shadow-lg hover:bg-primary/90">
-        Build your plan
-      </a>
+    <div class="text-center mb-14">
+      <span class="bg-primary text-white px-4 py-1 rounded-full text-sm">Benefits</span>
+      <h2 class="text-3xl md:text-4xl font-bold mt-4">
+        Why choose FarmEx?
+      </h2>
+      <p class="text-slate-600 max-w-2xl mx-auto mt-3">
+        Choose only the services you need and scale as you grow.
+      </p>
     </div>
 
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+      <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
+        <i class="ri-timer-flash-line text-primary text-3xl"></i>
+        <h3 class="font-semibold text-xl mt-4">Real‑Time Operational Visibility</h3>
+        <p class="text-slate-600 mt-2">
+          Live dashboards and KPIs (orders, revenue, penetration, retention, product diversity) to monitor performance and outcomes in real-time.
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
+        <i class="ri-drag-move-line text-primary text-3xl"></i>
+        <h3 class="font-semibold text-xl mt-4">Efficiency and Automation</h3>
+        <p class="text-slate-600 mt-2">
+          Centralized capture of field data (farms, seasons, trainings, aggregations) reduces manual reporting and reconciliation 
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
+        <i class="ri-database-line text-primary text-3xl"></i>
+        <h3 class="font-semibold text-xl mt-4">Data‑Driven Decision Making</h3>
+        <p class="text-slate-600 mt-2">
+          Market intelligence (commodity pricing, competitor products) informs procurement, pricing, and channel strategies  
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
+        <i class="ri-secure-payment-line text-primary text-3xl"></i>
+        <h3 class="font-semibold text-xl mt-4">Secure and Governed Access</h3>
+        <p class="text-slate-600 mt-2">
+          Robust middleware and role‑based panel access protect sensitive data and align with governance needs 
+        </p>
+      </div>
+
+      <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-lg transition">
+        <i class="ri-bar-chart-line text-primary text-3xl"></i>
+        <h3 class="font-semibold text-xl mt-4">Analytics Highlights</h3>
+        <p class="text-slate-600 mt-2">
+          Revenue and Order Insights: totals, averages, unique farmers/agents, retention rates, market penetration; per location rollups 
+        </p>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -264,16 +314,16 @@
 <section class="py-24 bg-gradient-to-r from-primary to-emerald-700 text-white">
   <div class="container mx-auto px-4 text-center">
     <h2 class="text-3xl md:text-4xl font-bold">
-      Ready to get started?
+      Set a schedule for a Demo
     </h2>
     <p class="mt-4 max-w-xl mx-auto">
-      Start managing your field operations more effectively today.
+      See how Farmex can help you start managing your field operations more effectively today.
     </p>
 
     <div class="mt-8">
-      <a href="#"
+      <a href="/quotation?type=demo"
          class="bg-white text-primary px-10 py-4 rounded-xl font-semibold shadow-lg">
-        Start free trial
+        Schedule Demo
       </a>
     </div>
   </div>
