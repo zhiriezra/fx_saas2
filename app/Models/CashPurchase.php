@@ -5,32 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class CashPurchase extends Model
 {
     use HasFactory;
-
-    public function product()
-    {
-        return $this->belongsTo(Product::class);
-    }
 
     public function agent()
     {
         return $this->belongsTo(Agent::class);
     }
 
-    public function vendor(){
+    public function vendor()
+    {
         return $this->belongsTo(Vendor::class);
     }
 
-    public function farmer()
+    public function items()
     {
-        return $this->belongsTo(Farmer::class);
-    }
-
-    public function orderItems()
-    {
-        return $this->hasMany(OrderItem::class);
+        return $this->hasMany(CashPurchaseItem::class);
     }
 
     public function team()
