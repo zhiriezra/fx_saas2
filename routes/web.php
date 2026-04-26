@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebsiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/quotation', [WebsiteController::class, 'showQuoteForm'])->name('quotation');
+Route::post('/quotation', [WebsiteController::class, 'submitQuote'])->name('quotation.submit');
